@@ -1,18 +1,14 @@
 package cmd
 
 import (
+	"To-doList/functions"
 	"fmt"
 	"os"
 )
 
-func Add(file *os.File, text string) (int, string) {
-	data, _ := os.ReadFile("To-doList.txt")
-
-	id := 0
-	fmt.Sscanf(string(data), "%d", id)
-
-	os.WriteFile("To-doList.txt", []byte(fmt.Sprintf("%d. %s", id+1, text)), 0644)
-	return id + 1, text
+func Add(file *os.File, text string) {
+	id := functions.Id()
+	file.WriteString(fmt.Sprintf("%d. %s\n", id, text))
 }
 
 func Delete(id int) {
